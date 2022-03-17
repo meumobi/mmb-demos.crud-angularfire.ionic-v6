@@ -1,0 +1,7 @@
+{
+  "name": "mmb-demos.crud-angularfire.ionic-v6",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
