@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Item } from '../item.model';
+import { ItemService } from '../shared/services';
 
 @Component({
   selector: 'app-item-list',
@@ -6,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./item-list.component.scss'],
 })
 export class ItemListComponent implements OnInit {
-  constructor() {}
+  items$: Observable<Item[]>;
 
-  ngOnInit() {}
+  constructor(private itemsService: ItemService) {}
+
+  ngOnInit() {
+    this.items$ = this.itemsService.items$;
+  }
 }
