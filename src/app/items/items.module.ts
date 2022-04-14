@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { ItemsRoutingModule } from './items-routing.module';
 import { ItemListComponent } from './item-list/item-list.component';
+import { ItemDetailComponent } from './item-detail/item-detail.component';
 
 @NgModule({
-  declarations: [ItemListComponent],
+  declarations: [ItemListComponent, ItemDetailComponent],
   imports: [CommonModule, ItemsRoutingModule],
 })
 export class ItemsModule {}

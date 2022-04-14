@@ -14,6 +14,6 @@ export class ItemListComponent implements OnInit {
   constructor(private itemsService: ItemService) {}
 
   ngOnInit() {
-    this.items$ = this.itemsService.items$;
+    this.items$ = this.itemsService.data$;
   }
 }
