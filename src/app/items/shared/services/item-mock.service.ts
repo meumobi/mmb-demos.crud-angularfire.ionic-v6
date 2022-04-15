@@ -3,7 +3,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { ItemMock } from '../../item-mock';
 import { Item } from '../../item.model';
-import keyBy from 'lodash/keyBy';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +19,7 @@ export class ItemMockService {
     return this.items.asObservable().pipe(delay(2000)); // delay to simulate http request
   }
 
-  create(item: Item): Promise<any> {
+  create(item: Item): Promise<void> {
     this.data.push(item);
     this.items.next(this.data);
 
@@ -28,25 +27,23 @@ export class ItemMockService {
   }
 
   getById(id: string): Promise<Item> {
-    const itemsKeyById = keyBy(this.data, 'id');
-    const item = itemsKeyById[id] || null;
+    const item = this.data.find((x) => x.id === id);
 
     return new Promise((resolve) => setTimeout(() => resolve(item), 2000));
   }
 
   update(id: string, data: Partial<Item>): Promise<void> {
-    const itemsKeyById = keyBy(this.data, 'id');
-    itemsKeyById[id] = { ...itemsKeyById[id], ...data };
-    this.data = Object.values(itemsKeyById);
+    const itemIndex = this.data.findIndex((x) => x.id === id);
+    if (itemIndex != null && itemIndex !== undefined) {
+      this.data[itemIndex] = { ...this.data[itemIndex], ...data };
+    }
     this.items.next(this.data);
 
     return Promise.resolve();
   }
 
   delete(id: string): Promise<void> {
-    const itemsKeyById = keyBy(this.data, 'id');
-    delete itemsKeyById[id];
-    this.data = Object.values(itemsKeyById);
+    this.data = this.data.filter((x) => x.id !== id);
     this.items.next(this.data);
 
     return Promise.resolve();

@@ -1,7 +1,6 @@
 import { ItemMock } from '../../item-mock';
 import { Item } from '../../item.model';
 import { ItemMockService } from './item-mock.service';
-import keyBy from 'lodash/keyBy';
 
 describe('ItemMockService', () => {
   let itemMockService: ItemMockService;
@@ -42,8 +41,8 @@ describe('ItemMockService', () => {
     const id = '123';
     itemMockService.update(id, { title }).then((_) => {
       itemMockService.data$.subscribe((items) => {
-        const itemsKeyById = keyBy(items, 'id');
-        expect(itemsKeyById[id].title === title).toBeTrue();
+        const item = items.find((x) => x.id === id);
+        expect(item.title === title).toBeTrue();
         done();
       });
     });
@@ -63,8 +62,8 @@ describe('ItemMockService', () => {
     const id = '123';
     itemMockService.delete(id).then((_) => {
       itemMockService.data$.subscribe((items) => {
-        const itemsKeyById = keyBy(items, 'id');
-        expect(itemsKeyById[id] === undefined).toBeTrue();
+        const item = items.find((x) => x.id === id);
+        expect(item === undefined).toBeTrue();
         done();
       });
     });
