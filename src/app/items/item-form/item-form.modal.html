@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Create/Edit </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+    <input formControlName="title" type="text" />
+    <div *ngIf="f['title'].touched && f['title'].invalid">
+      <div *ngIf="f['title'].errors && f['title'].errors['required']">
+        Title is required.
+      </div>
+    </div>
+
+    <button [disabled]="isLoading || !itemForm.valid">Save</button>
+  </form>
+</ion-content>

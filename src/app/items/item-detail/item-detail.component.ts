@@ -10,7 +10,7 @@ import { ItemService } from '../shared/services';
 })
 export class ItemDetailComponent implements OnInit {
   itemId: string;
-  item: Item;
+  item: Item | undefined;
 
   constructor(
     private route: ActivatedRoute,

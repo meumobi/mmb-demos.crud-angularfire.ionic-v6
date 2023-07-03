@@ -57,3 +57,10 @@ export const environment = {
 
 4. Run `ionic serve`
 5. Profit. :tada:
+
+## Inspirations
+
+- [javebratt/task-manager](https://egghead.io/lessons/firebase-set-up-a-new-firebase-project-and-connect-it-to-your-angular-application)
+- [jasonwatmore/angular-11-crud-example-with-reactive-forms](https://jasonwatmore.com/post/2020/12/15/angular-11-crud-example-with-reactive-forms)
+- [webchris/Angular-6-CRUD-Example-Application/](https://wechris.github.io/tips-tutorials/angular/typescript/json/crud/webapp/angular6/2018/07/30/Angular-6-CRUD-Example-Application/)
+- [c-sharpcorner/angular-crud-operations](https://www.c-sharpcorner.com/blogs/angular-crud-operations)

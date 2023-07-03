@@ -1,8 +1,24 @@
+# Create/update modal form
+
 ## Components
 
 ```sh
 $ ng g c items/item-form -m items --type modal
 ```
+
+Update eslint config (`.eslintrc`) to add 'modal' as component class suffix:
+
+```json
+"rules": {
+  "@angular-eslint/component-class-suffix": [
+    "error",
+    {
+      "suffixes": ["Page", "Component", "Modal"]
+    }
+  ],
+```
+
+Add `ReactiveFormsModule` on itemsModule
 
 FAB button to create
 
@@ -29,9 +45,7 @@ During creation of a modal, data can be passed in through the `componentProps`.
 async onUpdate(item) {
   const modal = await this.modalController.create({
     component: ItemForm,
-    componentProps: {
-    'item': item
-    }
+    componentProps: { item }
   });
   return await modal.present();
 }
@@ -43,7 +57,7 @@ To get the data passed into the `componentProps`, set it as an `@Input`:
 export class ItemForm implements OnInit {
 
   // Data passed in by componentProps
-  @Input() item: Item;
+  @Input() item: Item = new Item();
 
   form!: FormGroup;
   isLoading = false;
@@ -51,7 +65,7 @@ export class ItemForm implements OnInit {
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.isCreateMode = !this.item;
+    this.isCreateMode = !this.item.id;
 
     this.form = this.formBuilder.group({
       title: ['', Validators.required],
@@ -68,12 +82,8 @@ export class ItemForm implements OnInit {
   get f() { return this.form.controls; }
 
   onSubmit() {
-    // stop here if form is invalid
-    if (this.form.invalid) {
-        return;
-    }
-
     this.isLoading = true;
+
     if (this.isCreateMode) {
         this.createUser();
     } else {
@@ -115,11 +125,12 @@ export class ItemForm implements OnInit {
 </form>
 ```
 
-- https://jasonwatmore.com/post/2020/12/15/angular-11-crud-example-with-reactive-forms#users-add-edit-component-ts
-- https://wechris.github.io/tips-tutorials/angular/typescript/json/crud/webapp/angular6/2018/07/30/Angular-6-CRUD-Example-Application/
-- https://www.c-sharpcorner.com/blogs/angular-crud-operations
-
 ## Mock backend
 
 https://jsonplaceholder.typicode.com/
 [cornflourblue/FakeBackendInterceptor implements HttpInterceptor](https://github.com/cornflourblue/angular-11-crud-example/blob/master/src/app/_helpers/fake-backend.ts)
+
+## Furthermore
+
+- [Angular Forms Guide - Template Driven and Reactive Forms](https://blog.angular-university.io/introduction-to-angular-2-forms-template-driven-vs-model-driven/)
+- [Ionic modal controller](https://ionicframework.com/docs/api/modal#controller-modals)

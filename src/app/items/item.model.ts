@@ -7,7 +7,7 @@ export class Item {
   modifiedAt: string = null;
   picture: string = null;
 
-  constructor(props: any) {
+  constructor(props: any = {}) {
     Object.entries(props).forEach(([key, value]) => (this[key] = value));
   }
 }

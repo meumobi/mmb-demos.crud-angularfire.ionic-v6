@@ -20,24 +20,19 @@ ItemsModule is needed for setting up lazy loading for your feature module.
 ## Components
 
 ```bash
+
 $ ng g c items/item-list -m items --type page
+CREATE src/app/items/item-list/item-list.page.scss (0 bytes)
+CREATE src/app/items/item-list/item-list.page.html (24 bytes)
+CREATE src/app/items/item-list/item-list.page.spec.ts (606 bytes)
+CREATE src/app/items/item-list/item-list.page.ts (272 bytes)
+UPDATE src/app/items/items.module.ts (355 bytes)
 $ ng g c items/item-detail -m items --type page
-```
-
-And declare them on ItemsModule as below:
-
-```ts
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ItemsRoutingModule } from './items-routing.module';
-import { ItemListComponent } from './item-list/item-list.component';
-import { ItemDetailComponent } from './item-detail/item-detail.component';
-
-@NgModule({
-  declarations: [ItemListComponent, ItemDetailComponent],
-  imports: [CommonModule, ItemsRoutingModule],
-})
-export class ItemsModule {}
+CREATE src/app/items/item-detail/item-detail.page.scss (0 bytes)
+CREATE src/app/items/item-detail/item-detail.page.html (26 bytes)
+CREATE src/app/items/item-detail/item-detail.page.spec.ts (620 bytes)
+CREATE src/app/items/item-detail/item-detail.page.ts (280 bytes)
+UPDATE src/app/items/items.module.ts (440 bytes)
 ```
 
 ## Routing
@@ -65,8 +60,8 @@ import { ItemDetailComponent } from './item-detail/item-detail.component';
 
 
 const routes: Routes = [
-  { path: '', component: ItemListComponent},
-  { path: 'detail/:id', component: ItemDetailComponent},
+  { path: '', component: ItemListPage},
+  { path: 'detail/:id', component: ItemDetailPage},
 ];
 ...
 ```

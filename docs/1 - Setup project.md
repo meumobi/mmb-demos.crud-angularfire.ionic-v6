@@ -1,4 +1,4 @@
-# Setup Dev tools
+# Setup Project
 
 ## Use ng schematics instead of @ionic/angular-toolkit
 
